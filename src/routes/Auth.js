@@ -2,6 +2,10 @@ import { auth } from "fbase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signInWithPopup,
+  fetchSignInMethodsForEmail,
 } from "@firebase/auth";
 import React, { useState } from "react";
 
@@ -40,6 +44,31 @@ const Auth = () => {
     setNewAccount((prev) => !prev);
   };
 
+  const onSocialClick = async (event) => {
+    const {
+      target: { name },
+    } = event;
+    let provider;
+    if (name === "google") {
+      provider = new GoogleAuthProvider();
+    } else if (name === "github") {
+      provider = new GithubAuthProvider();
+    }
+
+    try {
+      const data = await signInWithPopup(auth, provider);
+      console.log(data);
+    } catch (error) {
+      if (error.code === "auth/account-exists-with-different-credential") {
+        const {
+          customData: { email },
+        } = error;
+        const methods = await fetchSignInMethodsForEmail(auth, email);
+        setError(`${email} is already ${methods[0]} account`);
+      }
+    }
+  };
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -69,8 +98,12 @@ const Auth = () => {
         {newAccount ? "Sign In" : "Create Account"}
       </span>
       <div>
-        <button>Continue with Google</button>
-        <button>Continue with Github</button>
+        <button onClick={onSocialClick} name="google">
+          Continue with Google
+        </button>
+        <button onClick={onSocialClick} name="github">
+          Continue with Github
+        </button>
       </div>
     </div>
   );
