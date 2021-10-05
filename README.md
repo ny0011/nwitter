@@ -37,14 +37,23 @@ Twitter (mini)clone with React and Firebase
 
 - https://firebase.google.com/docs/reference/js/auth?authuser=0
 - 이메일로 가입/로그인
-  - createUserWithEmailAndPassword : email과 passwd로 계정 생성
-  - signInWithEmailAndPassword : email과 passwd로 로그인
-  - setPersistence : 현재 저장된 auth 세션의 persistence의 타입을 바꿈.
+
+  - `createUserWithEmailAndPassword` : email과 passwd로 계정 생성
+  - `signInWithEmailAndPassword` : email과 passwd로 로그인
+  - `setPersistence` : 현재 저장된 auth 세션의 persistence의 타입을 바꿈.
     - 위에서 계정 생성과 로그인을 하면 auth에 계정 정보가 저장 돼 있음 -> 이 정보를 얼마나 유지할 지 설정
     - Persistence type : 3종류
       - 'NONE' : memory에 저장됨.
       - 'SESSION' : 임시 저장(temporary persistence). sessionStorage에 저장. 브라우저가 열려있을 때만 유지
       - 'LOCAL' : 오래 저장(long term persistence). localStorage or IndexedDB에 저장. 브라우저를 닫아도 유지
+  - 로그인을 위해 toggleAccount 함수를 만들어서 newAccount를 변경
+
+- 앱 초기화
+  - 앱을 실행하면 초기화 -> 화면이 그려지는데 firebase도 초기화까지 시간이 걸려서 처음에는 로그인이 안된 상태가 됨
+  - 앱 초기화 -> firebase 초기화 -> firebase 로그인 체크 -> 화면 그리기 로 만들 것임
+    - init 변수 : firebase가 초기화됐는지 확인
+    - useEffect hooks : user의 상태가 변하는지 확인 -> `onAuthStateChanged` 메소드 사용 -> isLoggedIn 변수를 변경
+    - `onAuthStateChanged` : 사용자의 로그인 상태(로그인/로그아웃)가 변하는 걸 체크하는 observer를 추가. 이벤트 리스너 추가.
 
 ### auth 외 코드
 
