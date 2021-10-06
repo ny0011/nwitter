@@ -72,6 +72,8 @@ Twitter (mini)clone with React and Firebase
 
 ## 3. Nweeting
 
+- cloud firestore : https://firebase.google.com/docs/firestore?hl=ko
+
 ### DB 만들기
 
 - firebase 웹 페이지에서 `Firestore Database` 선택 -> 테스트 모드 시작 -> 위치 : asia-northeast3
@@ -80,8 +82,18 @@ Twitter (mini)clone with React and Firebase
   - document : 문서 같은 텍스트. 필드, 유형, 값을 지정
   - collection을 만들고 그 안에 document를 만듦
 
-### DB 추가하기
+### DB에 내용 생성하기(Create)
 
 - 목표 : Home에서 Nweet을 적고 submit 버튼을 누르면 document를 생성하기
+  - 데이터 : text, 생성일, user
 - `addDoc` : Collection에 새 document 추가
   - https://firebase.google.com/docs/reference/js/firestore_.md?hl=ko#adddoc
+- user는 Home.js 뿐만 아니라 다양한 곳에서 사용되니까 App.js에서 user 관리
+  - App.js -> Router.js -> Home.js로 user 데이터 전달됨
+
+### DB의 내용 읽기(Read)
+
+- `collection` : DB의 reference(collection)를 가져옴. CollectionReference 리턴(Query 상속)
+- `query` : DB에 질문해서 원하는 데이터 가져옴. Query 리턴
+- `getDocs` : collection에 있는 documents를 한 번 불러옴
+- `onSnapshot` : collection에 있는 documents를 실시간으로 불러옴
