@@ -69,3 +69,19 @@ Twitter (mini)clone with React and Firebase
 **auth 외 코드**
 
 - jsconfig.json : import할 때 기준 폴더를 지정
+
+## 3. Nweeting
+
+### DB 만들기
+
+- firebase 웹 페이지에서 `Firestore Database` 선택 -> 테스트 모드 시작 -> 위치 : asia-northeast3
+- NoSQL DB로 만들어짐
+  - collection : document 모음
+  - document : 문서 같은 텍스트. 필드, 유형, 값을 지정
+  - collection을 만들고 그 안에 document를 만듦
+
+### DB 추가하기
+
+- 목표 : Home에서 Nweet을 적고 submit 버튼을 누르면 document를 생성하기
+- `addDoc` : Collection에 새 document 추가
+  - https://firebase.google.com/docs/reference/js/firestore_.md?hl=ko#adddoc
