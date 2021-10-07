@@ -82,7 +82,7 @@ Twitter (mini)clone with React and Firebase
   - document : 문서 같은 텍스트. 필드, 유형, 값을 지정
   - collection을 만들고 그 안에 document를 만듦
 
-### DB에 내용 생성하기(Create)
+### DB에 document 생성하기(Create)
 
 - 목표 : Home에서 Nweet을 적고 submit 버튼을 누르면 document를 생성하기
   - 데이터 : text, 생성일, user
@@ -91,9 +91,21 @@ Twitter (mini)clone with React and Firebase
 - user는 Home.js 뿐만 아니라 다양한 곳에서 사용되니까 App.js에서 user 관리
   - App.js -> Router.js -> Home.js로 user 데이터 전달됨
 
-### DB의 내용 읽기(Read)
+### DB의 document 수정하기(Update)
+
+- `updateDoc`
+
+### DB의 document 읽기(Read)
 
 - `collection` : DB의 reference(collection)를 가져옴. CollectionReference 리턴(Query 상속)
 - `query` : DB에 질문해서 원하는 데이터 가져옴. Query 리턴
 - `getDocs` : collection에 있는 documents를 한 번 불러옴
 - `onSnapshot` : collection에 있는 documents를 실시간으로 불러옴
+
+### DB의 document 삭제하기(Delete)
+
+- `deleteDoc` : `doc`로 삭제할 document를 선택 후 삭제
+  ```
+    deleteDoc(doc(db, "collection", "document id"))
+    deleteDoc(doc(db, "collection/document id")) 이렇게 /로 구분해도 됨
+  ```
