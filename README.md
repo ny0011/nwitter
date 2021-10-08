@@ -109,3 +109,28 @@ Twitter (mini)clone with React and Firebase
     deleteDoc(doc(db, "collection", "document id"))
     deleteDoc(doc(db, "collection/document id")) 이렇게 /로 구분해도 됨
   ```
+
+## 4. File Upload
+
+- 목표 : 게시글에 사진 추가하는 곳 만들기
+
+### 이미지 추가하는 버튼, 미리보기 이미지 보여주기
+
+- nweet 만드는 곳(Home.js)에 사진 추가하는 input 태그 만듦
+- 미리보기로 확인하기 위해 FileReader API를 사용
+  - https://developer.mozilla.org/ko/docs/Web/API/File/Using_files_from_web_applications#%EC%98%88%EC%8B%9C_%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B0%80_%EC%84%A0%ED%83%9D%ED%95%9C_%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%9D%98_%EC%84%AC%EB%84%A4%EC%9D%BC_%EB%B3%B4%EC%97%AC%EC%A3%BC%EA%B8%B0
+- onloadend : load가 끝났을 때 이벤트가 발생함.
+
+### react hooks API
+
+- useRef()
+
+  - react의 hooks API
+  - 사용 방법 : useRef()의 인스턴스를 생성하고 인스턴스를 <태그>의 ref에 넣기
+    - 인스턴스.current = <태그>
+    - 이렇게 하면 태그의 property를 변경할 수 있음
+
+  ```
+    const inputElement = useRef(null)
+    <input ref={inputElement} type="text">
+  ```
