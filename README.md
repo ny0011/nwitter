@@ -121,6 +121,19 @@ Twitter (mini)clone with React and Firebase
   - https://developer.mozilla.org/ko/docs/Web/API/File/Using_files_from_web_applications#%EC%98%88%EC%8B%9C_%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B0%80_%EC%84%A0%ED%83%9D%ED%95%9C_%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%9D%98_%EC%84%AC%EB%84%A4%EC%9D%BC_%EB%B3%B4%EC%97%AC%EC%A3%BC%EA%B8%B0
 - onloadend : load가 끝났을 때 이벤트가 발생함.
 
+### firebase storage를 사용해 업로드한 이미지를 저장
+
+- `getStorage` : 내 firebase의 storage를 얻음
+- `ref`(storage, 업로드 할 위치/파일 이름) : storage에 저장할 파일의 위치/이름 지정
+- `uploadString`(ref, 파일, 파일 형식) : storage에 파일 업로드(파일이 문자열 형식으로 되어있으면 uploadString을 사용)
+- `getDownloadURL`(uploadString의 결과의 ref) : firebase storage에 저장된 파일의 url 얻음
+
+### 트윗 업로드
+
+- 사진 있음?
+  - Yes : 사진 업로드 -> 사진 URL 받음 -> 트윗에 사진 URL 추가
+  - NO : 트윗에 글만 업로드
+
 ### react hooks API
 
 - useRef()

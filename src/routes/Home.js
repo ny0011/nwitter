@@ -5,9 +5,12 @@ import {
   orderBy,
   query,
 } from "@firebase/firestore";
+import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 import Nweet from "components/Nweet";
-import { db } from "fbase";
+import { db, storage } from "fbase";
 import React, { useEffect, useRef, useState } from "react";
+
+import { v4 as uuidv4 } from "uuid";
 
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
@@ -33,16 +36,33 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+
     try {
-      await addDoc(collection(db, "nweets"), {
+      let attachmentUrl = "";
+      if (attachment !== "") {
+        // attachmentRef = firebase storage에서 사용자/'파일의 랜덤 이름 '
+        const attachmentRef = ref(storage, `${userObj.uid}/${uuidv4()}`);
+        const response = await uploadString(
+          attachmentRef,
+          attachment,
+          "data_url"
+        );
+        attachmentUrl = await getDownloadURL(response.ref);
+      }
+
+      const nweetObj = {
         text: nweet,
         createdAt: Date.now(),
         creatorId: userObj.uid,
-      });
+        attachmentUrl,
+      };
+      await addDoc(collection(db, "nweets"), nweetObj);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
     setNweet("");
+    setAttachment("");
+    imageInputRef.current.value = "";
   };
 
   const onChange = (event) => {
