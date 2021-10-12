@@ -98,7 +98,7 @@ Twitter (mini)clone with React and Firebase
 ### DB의 document 읽기(Read)
 
 - `collection` : DB의 reference(collection)를 가져옴. CollectionReference 리턴(Query 상속)
-- `query` : DB에 질문해서 원하는 데이터 가져옴. Query 리턴
+- `query` : DB에 질문할 쿼리를 만듦. Query 리턴
 - `getDocs` : collection에 있는 documents를 한 번 불러옴
 - `onSnapshot` : collection에 있는 documents를 실시간으로 불러옴
 
@@ -148,3 +148,14 @@ Twitter (mini)clone with React and Firebase
     const inputElement = useRef(null)
     <input ref={inputElement} type="text">
   ```
+
+## 5. Edit Profile
+
+- 목표 : 내 nweets을 profile에서 보여주기
+
+### firestore에 복합 쿼리 보내기
+
+- firestore는 NoSQL 기반 DB라서 where, orderBy 같은 제한자를 동시에 여러 개 사용할 수 없음
+  - query에 index가 필요하다는 에러 발생
+  - pre-made query를 만들어야 함
+  - 미리 DB에 이런 query를 쓸거라고 알려줘야 함

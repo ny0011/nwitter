@@ -15,20 +15,18 @@ import { v4 as uuidv4 } from "uuid";
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const [attachment, setAttachment] = useState(null);
+  const [attachment, setAttachment] = useState("");
   const imageInputRef = useRef(null);
 
   const getNweets = () => {
-    onSnapshot(
-      query(collection(db, "nweets"), orderBy("createdAt", "desc")),
-      (snapshot) => {
-        const nweetArray = snapshot.docs.map((document) => ({
-          id: document.id,
-          ...document.data(),
-        }));
-        setNweets(nweetArray);
-      }
-    );
+    const q = query(collection(db, "nweets"), orderBy("createdAt", "desc"));
+    onSnapshot(q, (snapshot) => {
+      const nweetArray = snapshot.docs.map((document) => ({
+        id: document.id,
+        ...document.data(),
+      }));
+      setNweets(nweetArray);
+    });
   };
   useEffect(() => {
     getNweets();
@@ -88,7 +86,7 @@ const Home = ({ userObj }) => {
   };
 
   const onClearAttachment = () => {
-    setAttachment(null);
+    setAttachment("");
     imageInputRef.current.value = "";
   };
 
