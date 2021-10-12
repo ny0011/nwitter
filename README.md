@@ -159,3 +159,22 @@ Twitter (mini)clone with React and Firebase
   - query에 index가 필요하다는 에러 발생
   - pre-made query를 만들어야 함
   - 미리 DB에 이런 query를 쓸거라고 알려줘야 함
+
+### App.js에서 userObj을 다른 components로 전달하는 이유
+
+- 한 곳에서 userObj를 관리하는 게 유지보수가 편함
+
+### My Profile 대신 내 이름을 넣어보자 - profile.js
+
+- newDisplayName : 바꿀 이름
+- `updateProfile` : displayName, photoURL 을 변경
+  - 그치만 navigation에 바로 바뀐 이름이 변경되지 않음
+  - refreshUser()로 useState에 등록된 userObj가 변경되었음을 알리기
+    - 그치만 원래 userObj가 너무 크기 때문에 React에서 변경을 판단하기 어려움
+      1. object 크기를 줄이기
+         - userObj에 필요한 변수만 넣어서 새로 만들기
+      2. object를 새로 만들기
+         - refreshUser() 에 새로 선언
+           ```
+           setUserObj(Object.assign({},user))
+           ```
