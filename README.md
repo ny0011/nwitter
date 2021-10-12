@@ -127,6 +127,7 @@ Twitter (mini)clone with React and Firebase
 - `ref`(storage, 업로드 할 위치/파일 이름) : storage에 저장할 파일의 위치/이름 지정
 - `uploadString`(ref, 파일, 파일 형식) : storage에 파일 업로드(파일이 문자열 형식으로 되어있으면 uploadString을 사용)
 - `getDownloadURL`(uploadString의 결과의 ref) : firebase storage에 저장된 파일의 url 얻음
+- `deleteObject` : ref를 삭제
 
 ### 트윗 업로드
 
