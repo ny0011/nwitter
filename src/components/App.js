@@ -10,8 +10,9 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // signed in
+        const name = user.displayName === null ? "뉴비" : user.displayName;
         setUserObj({
-          displayName: user.displayName,
+          displayName: name,
           uid: user.uid,
         });
       } else {
@@ -39,7 +40,11 @@ function App() {
       ) : (
         "Initializing..."
       )}
-      <footer>&copy;{new Date().getFullYear()} Nwitter</footer>
+      <footer
+        style={{ display: "flex", justifyContent: "center", marginTop: 50 }}
+      >
+        &copy;{new Date().getFullYear()} Nwitter
+      </footer>
     </>
   );
 }

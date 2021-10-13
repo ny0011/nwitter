@@ -2,6 +2,8 @@ import { deleteDoc, doc, updateDoc } from "@firebase/firestore";
 import { deleteObject, ref } from "@firebase/storage";
 import { db, storage } from "fbase";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -17,7 +19,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
     }
   };
 
-  const toggleEditting = () => {
+  const toggleEditing = () => {
     setEditing((prev) => !prev);
   };
 
@@ -35,12 +37,12 @@ const Nweet = ({ nweetObj, isOwner }) => {
   };
 
   return (
-    <div>
+    <div className="nweet">
       {editing ? (
         <>
           {isOwner && (
             <>
-              <form onSubmit={onSubmit}>
+              <form onSubmit={onSubmit} className="container nweetEdit">
                 <input
                   type="text"
                   placeholder="Edit your nweet"
@@ -48,9 +50,9 @@ const Nweet = ({ nweetObj, isOwner }) => {
                   onChange={onChange}
                   required
                 />
-                <input type="submit" value="Update Nweet" />
+                <input type="submit" value="Update Nweet" className="formBtn" />
               </form>
-              <button onClick={toggleEditting}>Cancel</button>
+              <button onClick={toggleEditing}>Cancel</button>
             </>
           )}
         </>
@@ -66,11 +68,15 @@ const Nweet = ({ nweetObj, isOwner }) => {
             />
           )}
           {isOwner && (
-            <>
-              <button onClick={onDeleteClick}>Delete Nweet</button>
-              <button onClick={toggleEditting}>Edit Nweet</button>
-            </>
-          )}{" "}
+            <div className="nweet__actions">
+              <span onClick={onDeleteClick}>
+                <FontAwesomeIcon icon={faTrash} />
+              </span>
+              <span onClick={toggleEditing}>
+                <FontAwesomeIcon icon={faPencilAlt} />
+              </span>
+            </div>
+          )}
         </>
       )}
     </div>
